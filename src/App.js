@@ -1,10 +1,20 @@
 import React from 'react';
+import {Route, Switch} from "react-router-dom";
+import {Navbar} from "./components/navbar/navbar";
+import {Home} from "./pages/home/home";
+import Weather from './pages/weather/weather'
 
-function App() {
+const App =() => {
   return (
-    <div className="App">
-Здесь будет проект WeatherAPI
-    </div>
+      <div>
+          <Navbar/>
+          <div className="container pt-4">
+              <Switch>
+                  <Route path='/' exact render={() => <Home/>}/>
+                  <Route path='/weather' exact render={() => <Weather/>}/>
+                 </Switch>
+          </div>
+      </div>
   );
 }
 
