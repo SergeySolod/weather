@@ -56,9 +56,9 @@ const setTempMax = (temp_max) => ({type: SET_TEMP_MAX, temp_max});
 const setTempMin = (temp_min) => ({type: SET_TEMP_MIN, temp_min});
 const setDescription = (description) => ({type: SET_DESCRIPTION, description});
 
-export const fetchWeatherTC = (dispatch) => {
+export const fetchWeatherTC = (City) => {
     return async (dispatch) => {
-        let data = await fetchWeather();
+        let data = await fetchWeather(City);
         dispatch(setCity(data.name));
         dispatch(setCountry(data.sys.country));
         dispatch(setMain(data.weather[0].main));

@@ -9,7 +9,7 @@ const App =() => {
   return (
       <div>
           <Navbar/>
-          <div className='App'>
+          <div className='container'>
               <Switch>
                   <Route path='/' exact render={() => <Home/>}/>
                   <Route path='/weather' exact render={() => <Weather/>}/>
