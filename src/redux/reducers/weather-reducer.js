@@ -2,6 +2,7 @@ import {fetchWeather} from "../../api/Api";
 
 const SET_CITY = 'WeatherAPI/weather-reducer/SET_CITY';
 const SET_COUNTRY = 'WeatherAPI/weather-reducer/SET_COUNTRY';
+const SET_ICON = 'WeatherAPI/weather-reducer/SET_ICON';
 const SET_DESCRIPTION = 'WeatherAPI/weather-reducer/SET_DESCRIPTION';
 const SET_MAIN = 'WeatherAPI/weather-reducer/SET_MAIN';
 const SET_CELSIUS = 'WeatherAPI/weather-reducer/SET_CELSIUS';
@@ -11,13 +12,12 @@ const SET_TEMP_MIN = 'WeatherAPI/weather-reducer/SET_TEMP_MIN';
 let initialState = {
     city: undefined,
     country: undefined,
-    icon: undefined,
+    icon: null,
     main: undefined,
     celsius: undefined,
     temp_max: null,
     temp_min: null,
-    description: "",
-    error: false
+    description: ""
 }
 
 const weatherReducer = (state = initialState, action) => {
@@ -27,6 +27,9 @@ const weatherReducer = (state = initialState, action) => {
         }
         case SET_COUNTRY: {
             return {...state, country: action.country}
+        }
+        case SET_ICON: {
+            return {...state, icon: action.icon}
         }
         case SET_MAIN: {
             return {...state, main: action.main}
@@ -48,10 +51,12 @@ const weatherReducer = (state = initialState, action) => {
     }
 }
 
+
 const setCity = (city) => ({type: SET_CITY, city});
 const setCountry = (country) => ({type: SET_COUNTRY, country});
+const setIcon = (icon) => ({type: SET_ICON, icon});
 const setMain = (main) => ({type: SET_MAIN, main});
-const setСelsius = (celsius) => ({type: SET_CELSIUS, celsius});
+const setCelsius = (celsius) => ({type: SET_CELSIUS, celsius});
 const setTempMax = (temp_max) => ({type: SET_TEMP_MAX, temp_max});
 const setTempMin = (temp_min) => ({type: SET_TEMP_MIN, temp_min});
 const setDescription = (description) => ({type: SET_DESCRIPTION, description});
@@ -61,8 +66,9 @@ export const fetchWeatherTC = (City) => {
         let data = await fetchWeather(City);
         dispatch(setCity(data.name));
         dispatch(setCountry(data.sys.country));
+        dispatch(setIcon(data.weather[0].id));
         dispatch(setMain(data.weather[0].main));
-        dispatch(setСelsius(data.main.temp));
+        dispatch(setCelsius(data.main.temp));
         dispatch(setTempMax(data.main.temp_min));
         dispatch(setTempMin(data.main.temp_max));
         dispatch(setDescription(data.weather[0].description));

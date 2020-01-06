@@ -1,20 +1,26 @@
 import React, {useEffect} from 'react'
 import {fetchWeatherTC} from "../../redux/reducers/weather-reducer";
+import {
+    getIcon,
+    getCity,
+    getCountry,
+    getMain,
+    getCelsius,
+    getTempMax,
+    getTempMin,
+    getDescription
+} from "../../redux/selectors/weather-selector";
 import {connect} from 'react-redux'
 import WeatherInput from './weather-input'
 
 const Weather = (props) => {
-    useEffect(() => {
-        props.fetchWeatherTC();
-    }, []);
-
-      return (
+    return (
         <div className='container'>
             <WeatherInput fetchWeatherTC={props.fetchWeatherTC}/>
             <div className='cards'>
                 <h1>{props.city} {props.country}</h1>
                 <h5 className='py-4'><br/>
-                    <i className='wi wi-day-sunny display-1'>
+                    <i className={`wi ${props.icon} display-1`}>
                     </i>
                 </h5>
                 <h1 className='py-2'>{props.celsius}&deg;</h1>
@@ -27,7 +33,7 @@ const Weather = (props) => {
             </span>
                 </h3>
                 <h4 className='py-3'>{props.main}</h4>
-                <h6 className='py-3'>{props.description}</h6>
+                <h4 className='py-3'>{props.description}</h4>
             </div>
         </div>
     )
@@ -37,13 +43,14 @@ const Weather = (props) => {
 const mapStateToProps = (state) => {
     return (
         {
-            city: state.weather.city,
-            country: state.weather.country,
-            main: state.weather.main,
-            celsius: state.weather.celsius,
-            temp_max: state.weather.temp_max,
-            temp_min: state.weather.temp_min,
-            description: state.weather.description
+            city: getCity(state),
+            country: getCountry(state),
+            icon: getIcon(state),
+            main: getMain(state),
+            celsius: getCelsius(state),
+            temp_max: getTempMax(state),
+            temp_min: getTempMin(state),
+            description: getDescription(state)
         }
     )
 }
