@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {fetchWeatherTC} from "../../redux/reducers/weather-reducer";
 import {
     getIcon,
@@ -17,23 +17,33 @@ const Weather = (props) => {
     return (
         <div className='container'>
             <WeatherInput fetchWeatherTC={props.fetchWeatherTC}/>
-            <div className='cards'>
-                <h1>{props.city} {props.country}</h1>
-                <h5 className='py-4'><br/>
-                    <i className={`wi ${props.icon} display-1`}>
-                    </i>
-                </h5>
-                <h1 className='py-2'>{props.celsius}&deg;</h1>
-                <h3>
+            <div className="row">
+
+                <div className="col-lg-5">
+                </div>
+                <div className="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+                    <div className="top-cover center-block">
+                        <p className="top-name center-block text-center">
+
+                            <h2>{props.city}</h2>
+                            <h5 className='pb-2'><br/>
+                                <i className={`wi ${props.icon} display-1`}>
+                                </i>
+                            </h5>
+                            <h1 className='py-2'>{props.celsius}&deg;</h1>
+                            <h3>
             <span className='px-4'>
                {props.temp_max}&deg;
             </span>
-                    <span className='px-4'>
+                                <span className='px-4'>
                {props.temp_min}&deg;
             </span>
-                </h3>
-                <h4 className='py-3'>{props.main}</h4>
-                <h4 className='py-3'>{props.description}</h4>
+                            </h3>
+                            <h4>{props.main}</h4>
+                            <h4>{props.description}</h4>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -3,7 +3,6 @@ import thunkMiddleware from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 import weatherReducer from './reducers/weather-reducer'
 
-
 let reducers = combineReducers({
        form: formReducer,
     weather: weatherReducer

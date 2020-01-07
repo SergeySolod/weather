@@ -9,11 +9,11 @@ const WeatherInputText = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Введите город</label>
+                <label htmlFor="exampleInputEmail1">Введите город (например, London, Moscow, Helsinki)</label>
                 <Field placeholder={'Название города'} name={'City'} validate={[required, maxLength30]} component={Input}
                        className="form-control"/>
             </div>
-            <button className="btn btn-primary">Найти</button>
+            <button className="btn btn-dark">Найти</button>
         </form>
     )
 }
